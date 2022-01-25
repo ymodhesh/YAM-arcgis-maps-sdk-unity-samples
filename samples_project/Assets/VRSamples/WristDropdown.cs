@@ -67,6 +67,7 @@ public class WristDropdown : MonoBehaviour
     {
 		var NewLevel = SceneManager.LoadSceneAsync(SceneName, new LoadSceneParameters(LoadSceneMode.Additive));
 		yield return new WaitForSeconds(1);
+		//pause for 1 second until the new scene is loaded, then we setup VR in the new scene
 		SetupVR();
 	}
 	/*
@@ -115,11 +116,10 @@ public class WristDropdown : MonoBehaviour
 	{
 		XRRig = FindObjectOfType<XROrigin>();
 		GameObject move = GameObject.Find("test");
-		SceneManager.MoveGameObjectToScene(move, SceneManager.GetSceneByName("VRComponent"));
+		SceneManager.MoveGameObjectToScene(move, SceneManager.GetSceneByName("VRAPI"));
 		arcGISMapViewComponent = GameObject.FindObjectOfType<ArcGISMapViewComponent>();
-		if(arcGISMapViewComponent != null)
+		if(arcGISMapViewComponent)
         {
-			Debug.Log("found mapview object");
 			move.transform.parent = arcGISMapViewComponent.transform;
 		}
 
