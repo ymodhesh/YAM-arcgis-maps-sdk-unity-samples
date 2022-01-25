@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/SampleViewer/SampleViewer.unity
     guid: 6ce02e91b78d9bf49b379e0b3df4c8e0
   - enabled: 1
@@ -21,3 +22,10 @@ EditorBuildSettings:
     path: Assets/SampleViewer/Samples/LineOfSight/LineOfSight.unity
     guid: 50288eb8a3c0ca3469af0d0b9e1ba6ea
   m_configObjects: {}
+=======
+    path: Assets/VRSamples/Resources/SampleScenes/VRAPI.unity
+    guid: 07613bbb974ec314a811b73d5e22bb3c
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1a13172f778a9c042b743fc94a333288, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 52083ab33fd7f1a429c11aa974e6c7a3, type: 2}
+>>>>>>> d8503ad (VR sample draft)
