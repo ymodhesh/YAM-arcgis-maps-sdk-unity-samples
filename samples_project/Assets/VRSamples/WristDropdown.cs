@@ -16,8 +16,6 @@ public class WristDropdown : MonoBehaviour
 	public Dropdown SceneDropdown;
 	private string SceneName;
 	private XROrigin XRRig;
-	public GameObject One;
-	public GameObject Two;
 	private bool loaded = false;
 	void Start()
 	{
@@ -62,9 +60,14 @@ public class WristDropdown : MonoBehaviour
 	{
 		SceneName = SceneDropdown.options[SceneDropdown.value].text;
 		//The scene must also be added to the build settings list of scenes
-		var loadedLevel=SceneManager.LoadSceneAsync(SceneName, new LoadSceneParameters(LoadSceneMode.Additive));
-		//yield return loadedLevel;
-		loaded = true;
+		StartCoroutine(LoadScene());
+		
+	}
+	IEnumerator LoadScene()
+    {
+		var NewLevel = SceneManager.LoadSceneAsync(SceneName, new LoadSceneParameters(LoadSceneMode.Additive));
+		yield return new WaitForSeconds(1);
+		SetupVR();
 	}
 	/*
 		//The ArcGISMapView object gets instantiated in our scenes and that results in the object living in the SampleViewer scene,
@@ -112,23 +115,12 @@ public class WristDropdown : MonoBehaviour
 	{
 		XRRig = FindObjectOfType<XROrigin>();
 		GameObject move = GameObject.Find("test");
-		SceneManager.MoveGameObjectToScene(move, SceneManager.GetSceneByName("VRAPI"));
-		
-		if(loaded==true)
+		SceneManager.MoveGameObjectToScene(move, SceneManager.GetSceneByName("VRComponent"));
+		arcGISMapViewComponent = GameObject.FindObjectOfType<ArcGISMapViewComponent>();
+		if(arcGISMapViewComponent != null)
         {
-			Debug.Log("loaded");
-			arcGISMapViewComponent = GameObject.FindObjectOfType<ArcGISMapViewComponent>();
-			if(arcGISMapViewComponent != null)
-            {
-				Debug.Log("found mapview object");
-				move.transform.parent = arcGISMapViewComponent.transform;
-			}
-			
-			
-		}
-		else
-		{
-			Debug.Log("didn't load");
+			Debug.Log("found mapview object");
+			move.transform.parent = arcGISMapViewComponent.transform;
 		}
 
 		/*var ActiveScene = SceneManager.GetActiveScene();
@@ -152,8 +144,6 @@ public class WristDropdown : MonoBehaviour
 		}*/
 
 
-		//XRRig.transform.parent = arcGISMapViewComponent.transform;
-		One.transform.parent = Two.transform;
 
 
 	}
