@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using Esri.ArcGISMapsSDK.Components;
 using Unity.XR.CoreUtils;
 
-public class WristDropdown : MonoBehaviour
+public class WristDropdownAPIScene : MonoBehaviour
 {
 	// Start is called before the first frame update
 	public GameObject wristUI;
@@ -18,7 +18,7 @@ public class WristDropdown : MonoBehaviour
 	private XROrigin XRRig;
 	public GameObject One;
 	public GameObject Two;
-	private bool loaded = false;
+
 	void Start()
 	{
 		SceneDropdown.onValueChanged.AddListener(delegate {
@@ -26,7 +26,7 @@ public class WristDropdown : MonoBehaviour
 		});
 		PopulateSampleSceneList();
 		DisplayWristUI();
-		SetupVR();
+		//SetupVR();
 	}
 	public void MenuPressed(InputAction.CallbackContext context)
 	{
@@ -56,15 +56,13 @@ public class WristDropdown : MonoBehaviour
 			}
 		}
 		SceneDropdown.AddOptions(SceneList);
-		AddScene();
+		//AddScene();
 	}
 	private void AddScene()
 	{
 		SceneName = SceneDropdown.options[SceneDropdown.value].text;
 		//The scene must also be added to the build settings list of scenes
-		var loadedLevel=SceneManager.LoadSceneAsync(SceneName, new LoadSceneParameters(LoadSceneMode.Additive));
-		//yield return loadedLevel;
-		loaded = true;
+		SceneManager.LoadSceneAsync(SceneName, new LoadSceneParameters(LoadSceneMode.Additive));
 	}
 	/*
 		//The ArcGISMapView object gets instantiated in our scenes and that results in the object living in the SampleViewer scene,
@@ -110,28 +108,7 @@ public class WristDropdown : MonoBehaviour
 	private ArcGISMapViewComponent arcGISMapViewComponent;
 	private void SetupVR()
 	{
-		XRRig = FindObjectOfType<XROrigin>();
-		GameObject move = GameObject.Find("test");
-		SceneManager.MoveGameObjectToScene(move, SceneManager.GetSceneByName("VRAPI"));
-		
-		if(loaded==true)
-        {
-			Debug.Log("loaded");
-			arcGISMapViewComponent = GameObject.FindObjectOfType<ArcGISMapViewComponent>();
-			if(arcGISMapViewComponent != null)
-            {
-				Debug.Log("found mapview object");
-				move.transform.parent = arcGISMapViewComponent.transform;
-			}
-			
-			
-		}
-		else
-		{
-			Debug.Log("didn't load");
-		}
-
-		/*var ActiveScene = SceneManager.GetActiveScene();
+		var ActiveScene = SceneManager.GetActiveScene();
 		Debug.Log(ActiveScene.name);
 		var RootGOs = ActiveScene.GetRootGameObjects();
 		foreach (var RootGO in RootGOs)
@@ -140,7 +117,7 @@ public class WristDropdown : MonoBehaviour
 			if (arcGISMapViewComponent)
 				Debug.Log("found mapview component");
 		}
-		GameObject[] goArray = SceneManager.GetSceneByName("VRAPI").GetRootGameObjects();
+		/*GameObject[] goArray = SceneManager.GetSceneByName("VRAPI").GetRootGameObjects();
 		GameObject rootGo;
 		if (goArray.Length>0)
         {
@@ -152,7 +129,12 @@ public class WristDropdown : MonoBehaviour
 		}*/
 
 
-		//XRRig.transform.parent = arcGISMapViewComponent.transform;
+		XRRig = FindObjectOfType<XROrigin>();
+
+		if (XRRig)
+			Debug.Log("found xr rig");
+
+		XRRig.transform.parent = arcGISMapViewComponent.transform;
 		One.transform.parent = Two.transform;
 
 
