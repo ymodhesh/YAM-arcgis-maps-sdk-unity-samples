@@ -41,7 +41,7 @@ public class VRSampleAPI : MonoBehaviour
 	private ArcGISLocationComponent cameraLocationComponent;
 	private ArcGISRebaseComponent cameraRebaseComponent;
 
-	private GeoPosition geographicCoordinates = new GeoPosition(-74.054921, 40.691242, 3000, (int)SpatialReferenceWkid.WGS84);
+	private GeoPosition geographicCoordinates = new GeoPosition(-117, 34, 3000, (int)SpatialReferenceWkid.WGS84);
 
 	// This sample event is used in conjunction with a Sample3DAttributes component
 	// It passes a layer to a listener to process its attributes
@@ -73,7 +73,7 @@ public class VRSampleAPI : MonoBehaviour
 		}
 
 		arcGISMapViewComponent.Position = geographicCoordinates;
-		arcGISMapViewComponent.ViewMode = Esri.GameEngine.Map.ArcGISMapType.Local;
+		arcGISMapViewComponent.ViewMode = Esri.GameEngine.Map.ArcGISMapType.Global;
 
 		// To change the Map Type in editor, you can change the View Mode property of the Map View component
 		// When you change the Map Type, this event will trigger a call to rebuild the map
@@ -85,23 +85,23 @@ public class VRSampleAPI : MonoBehaviour
 	private void CreateArcGISCamera()
 	{
 
-		VRRig.transform.SetParent(arcGISMapViewComponent.transform, false);
+		//VRRig.transform.SetParent(arcGISMapViewComponent.transform, false);
 
-		if(!VRCamera.GetComponent<ArcGISCameraComponent>())
-			cameraComponent = VRCamera.AddComponent<ArcGISCameraComponent>();
-		// The Camera Controller component provides player movement to the Camera game object
-		if(!VRCamera.GetComponent<ArcGISCameraControllerComponent>())
-			cameraControllerComponent=VRCamera.AddComponent<ArcGISCameraControllerComponent>();
+		//if(!VRCamera.GetComponent<ArcGISCameraComponent>())
+		//	cameraComponent = VRCamera.AddComponent<ArcGISCameraComponent>();
+		//// The Camera Controller component provides player movement to the Camera game object
+		//if(!VRCamera.GetComponent<ArcGISCameraControllerComponent>())
+		//	cameraControllerComponent=VRCamera.AddComponent<ArcGISCameraControllerComponent>();
 
-		// The Rebase component adjusts the world origin to accound for 32 bit floating point precision issues as the camera moves around the scene
-		if(!VRCamera.GetComponent<ArcGISRebaseComponent>())
-			cameraRebaseComponent=VRCamera.AddComponent<ArcGISRebaseComponent>();
-		if(!VRCamera.GetComponent <ArcGISLocationComponent>())
-        {
-			cameraLocationComponent = VRCamera.AddComponent<ArcGISLocationComponent>();
-			cameraLocationComponent.Position = geographicCoordinates;
-			cameraLocationComponent.Rotation = new Rotator(65, 68, 0);
-		}
+		//// The Rebase component adjusts the world origin to accound for 32 bit floating point precision issues as the camera moves around the scene
+		//if(!VRCamera.GetComponent<ArcGISRebaseComponent>())
+		//	cameraRebaseComponent=VRCamera.AddComponent<ArcGISRebaseComponent>();
+		//if(!VRCamera.GetComponent <ArcGISLocationComponent>())
+  //      {
+		//	cameraLocationComponent = VRCamera.AddComponent<ArcGISLocationComponent>();
+		//	cameraLocationComponent.Position = geographicCoordinates;
+		//	cameraLocationComponent.Rotation = new Rotator(65, 68, 0);
+		//}
 		
 
 	}

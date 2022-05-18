@@ -14,9 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/VRSamples/Resources/SampleScenes/VRComponent.unity
     guid: 1b88cb86308def64e9a7a27c02d91979
-  - enabled: 1
-    path: Assets/VRSamples/Resources/SampleScenes/VRPrefab.unity
-    guid: 2fd78972b36073247ab6a676081fafa1
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1a13172f778a9c042b743fc94a333288, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 52083ab33fd7f1a429c11aa974e6c7a3, type: 2}
